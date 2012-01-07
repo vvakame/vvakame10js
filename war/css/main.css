@@ -1,0 +1,149 @@
+@charset "UTF-8";
+/*****************************************
+SETUP
+*****************************************/
+/************************************
+INITIALIZATION
+************************************/
+*{
+    font-size:100%;
+}
+
+html{
+    height:100%;
+}
+
+body{
+    height:100%;
+    /*text-align:center;*/
+    position:relative;
+}
+
+body,div,dl,dt,dd,ul,ol,li,
+h1,h2,h3,h4,h5,h6,
+p,th,td,img,a,address{
+    margin:0;
+    padding:0;
+    text-decoration: none;
+    font-style:normal;
+    font-weight:normal;
+}
+
+hr{display:none;}
+
+em{
+    font-style:normal;
+}
+
+html>body sup{
+    font-size:80%;
+    line-height:0;
+    position:relative;
+    top:0.5em;
+    left:-0.3em;
+    font-family:monospace;
+}
+
+ul,li{
+    list-style:none;
+}
+
+img{
+    border:0;
+}
+
+a{
+    text-decoration:underline;
+    outline:0;
+}
+a:hover{
+    text-decoration:none;
+}
+
+
+/*****************************************
+BLOCK
+*****************************************/
+#wrap{
+    width:850px;
+    margin:0 auto;
+    overflow: hidden;
+    position:relative;
+}
+#header{
+    background:#efefef;
+    padding:20px 0;
+    text-align: center;
+}
+#content{
+    overflow: hidden;
+    position:relative;
+    margin-top:20px;
+}
+#main{
+    width:80%;
+    float:left;
+}
+#side{
+    width:18%;
+    float:right;
+}
+#footer{
+
+}
+
+/*****************************************
+HEADER
+*****************************************/
+#site_title{
+    font-size: 1.5em;
+}
+
+/*****************************************
+MAIN
+*****************************************/
+#category_ttl{
+    font-size: 1.3em;
+    font-weight: bold;
+    background-color:#efefef;
+    padding:10px;
+    margin-bottom:15px;
+}
+
+.tweet_box{
+    border:1px solid #ccc;
+    background-color:#efefef;
+    margin-bottom:10px;
+}
+.tweet_text{
+    padding:10px;
+    line-height: 1.5em;
+}
+.tweet_footer{
+    border-top:1px solid #fff;
+    padding-top:5px;
+}
+.tweet_footer span{
+    padding-right:1em;
+    padding: 5px;
+}
+.tweet_category{
+    display: block;
+    border-top: 1px solid #fff;
+    margin-top:5px;
+}
+
+/*****************************************
+SIDE
+*****************************************/
+#category_list li{
+    display: block;
+    margin-bottom:2px;
+}
+#category_list li a{
+    background:#efefef;
+    padding:5px;
+    text-align: left;
+    border-left:4px solid #ccc;
+    display: block;
+}
