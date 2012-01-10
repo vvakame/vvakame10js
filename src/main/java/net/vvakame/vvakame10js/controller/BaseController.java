@@ -42,7 +42,11 @@ public abstract class BaseController extends Controller {
 	abstract void process() throws Exception;
 
 	String getUserHash() {
-		for (Cookie cookie : request.getCookies()) {
+		Cookie[] cookies = request.getCookies();
+		if (cookies == null) {
+			return null;
+		}
+		for (Cookie cookie : cookies) {
 			if ("userHash".equals(cookie.getName())) {
 				return cookie.getValue();
 			}
