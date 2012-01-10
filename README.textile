@@ -1,0 +1,33 @@
+h1. Twitterのお気に入りを分類して表示するよ！
+
+このプロジェクトは vvakameとJS再入門(http://togetter.com/li/236390) の最後に作っていたものです。
+
+h2. 構成
+
+サーバ側 GoogleAppEngine/Java + Slim3
+クライアント側 HTML+JavaScript
+
+h2. ローカル開発環境の整備
+
+必要なのは以下のものです。
+
+* GooglePlugin for Eclipse (GPE)
+** http://code.google.com/intl/ja/eclipse/docs/getting_started.html
+* GoogleAppEngine SDK (GPEと一緒に落とせる)
+* maven2
+
+h3. Macの場合
+
+sudo port sync; sudo port install maven2
+でmaven2 がインストールされます。(MacPortsが利用可能な場合)
+
+後は
+
+mvn clean eclipse:clean eclipse:eclipse
+でEclipseにimportするためのメタファイルや依存ライブラリが自動的に生成/Downloadされます。
+
+後はEclipseからプロジェクトをimportして Run as > WebApplication してください。
+もしかしたら http://www.techscore.com/tech/Java/ApacheJakarta/Maven/4/ の設定が必要かもしれません。
+
+http://localhost:8888/
+で動作確認出来ます。
