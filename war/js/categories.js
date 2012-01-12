@@ -52,7 +52,7 @@ var addCategoryToDom = function(category) {
     // リンク貼りたくないので...
     // ↑自分で勝手に変えなさい！( ･`ω･´)
     // ↑あい(´・ω・｀)
-    var categoryNameEl = $("<li id=\"" + category.name + "\"/>");
+    var categoryNameEl = $("<li class=\"side_item\" id=\"" + category.name + "\"/>");
     categoryNameEl.click(function(){
         onClickCategory(category.name);
     });
