@@ -147,3 +147,12 @@ SIDE
     border-left:4px solid #ccc;
     display: block;
 }
+
+.side_item{
+    background:#efefef;
+    padding:5px;
+    text-align: left;
+    border-left:4px solid #ccc;
+    display: block;
+}
+
