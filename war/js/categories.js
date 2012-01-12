@@ -7,18 +7,21 @@
  */
 
 $(document).ready(function(){
-    getCategories(function(categoryList){
+    var processCategories = function(categoryList){
         for (var i=0; i<categoryList.length; i++){
             var category = categoryList[i];
             var categoryName = category.name;
             console.log("categoryName:" + categoryName );
             addCategoryToDom(category);
         }
-        tmpAddButtonAdd();
-    });
+    };
+    getCategories(processCategories);
+    tmpAddButtonAdd();
 });
 
 // TODO JsDoc でぐぐれ！ Javadocっぽい書き方よりJsDocのほうがいいよ！
+// ↑ へい！(； ･`д･´)
+// paramのtypeは...?? {function}とか書くのかいな...
 
 /**
  * カテゴリー一覧を取得しにいく
@@ -48,6 +51,7 @@ var addCategoryToDom = function(category) {
     // TODO main.cssの"#category_list li a{"の箇所、別のclass名振ってください...
     // リンク貼りたくないので...
     // ↑自分で勝手に変えなさい！( ･`ω･´)
+    // ↑あい(´・ω・｀)
     var categoryNameEl = $("<li id=\"" + category.name + "\"/>");
     categoryNameEl.click(function(){
         onClickCategory(category.name);
@@ -61,6 +65,7 @@ var addCategoryToDom = function(category) {
 /**
  * ただのスタブ... あとで消すよこれ
  * ↑はよ消せｗｗｗ
+ * ↑も、もうすこし待ってくれ(´；ω；｀)
  */
 var tmpAddButtonAdd = function() {
     var parent = $("#category_list");
@@ -75,6 +80,7 @@ var tmpAddButtonAdd = function() {
 
 };
 
+// ↓ 超thx
 // わかめならこう書く
 // JavaScriptの場合、かっしーが書いたみたいに引数に関数を渡す場合冗長になりがち。
 // そこで、一回名前を与えてからそっちを引数として渡したほうが分かりやすい場合のほうが多い気がするかなー。
