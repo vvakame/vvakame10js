@@ -31,7 +31,7 @@ public class FavoriteService {
 
 		favorite = new Favorite();
 
-		favorite.setKey(createKey(status.getId()));
+		favorite.setKey(key);
 		favorite.setFavorited(status.isFavorited());
 		favorite.setText(status.getText());
 		favorite.setCreatedAt(status.getCreatedAt());
@@ -47,7 +47,7 @@ public class FavoriteService {
 	}
 
 	public static Long getLatestFavId() {
-		Favorite latest = Datastore.query(META).sort(META.includeAt.desc)
+		Favorite latest = Datastore.query(META).sort(META.key.desc)
 				.limit(1).asSingle();
 		if (latest == null) {
 			return null;
@@ -57,7 +57,7 @@ public class FavoriteService {
 	}
 
 	public static List<Favorite> getRecently() {
-		return Datastore.query(META).sort(META.includeAt.desc).limit(100)
+		return Datastore.query(META).sort(META.key.desc).limit(100)
 				.asList();
 	}
 }
