@@ -1,24 +1,13 @@
 @charset "UTF-8";
 /*****************************************
-SETUP
-*****************************************/
-/************************************
 INITIALIZATION
-************************************/
-*{
-    font-size:100%;
-}
-
-html{
-    height:100%;
-}
-
+*****************************************/
+*{font-size:100%;}
+html{height:100%;}
 body{
     height:100%;
-    /*text-align:center;*/
     position:relative;
 }
-
 body,div,dl,dt,dd,ul,ol,li,
 h1,h2,h3,h4,h5,h6,
 p,th,td,img,a,address{
@@ -28,13 +17,8 @@ p,th,td,img,a,address{
     font-style:normal;
     font-weight:normal;
 }
-
 hr{display:none;}
-
-em{
-    font-style:normal;
-}
-
+em{font-style:normal;}
 html>body sup{
     font-size:80%;
     line-height:0;
@@ -43,49 +27,92 @@ html>body sup{
     left:-0.3em;
     font-family:monospace;
 }
-
-ul,li{
-    list-style:none;
-}
-
-img{
-    border:0;
-}
-
+ul,li{list-style:none;}
+img{border:0;}
 a{
-    text-decoration:underline;
+	text-decoration:underline;
     outline:0;
 }
-a:hover{
-    text-decoration:none;
+a:hover{text-decoration:none;}
+
+/*****************************************
+SETUP
+*****************************************/
+html,body{
+	overflow:visible;
+}
+body{
+	color:#333;
+	background-color:#fff;
+	font-size:80%;
+	font-family:'Hiragino Kaku Gothic Pro','ÉqÉâÉMÉmäpÉS Pro W3','ÉÅÉCÉäÉI',Meiryo,sans-serif;
+	text-align:left;
+	height:auto;
 }
 
+dt,dd,li,
+h1,h2,h3,h4,h5,h6,
+p,th,td,a{
+	letter-spacing:0.1em;
+}
+dd,p{
+	line-height:2.0;
+	text-align:justify;
+	text-justify:auto;
+}
+
+em{color:#c00;}
+
+a{
+	color:#32ccfe;
+	text-decoration: none;
+}
+a:visited{
+	color:#58a9e1;
+}
+a:hover,
+a:active{
+	text-decoration:underline;
+	color:#32ccfe;
+}
+
+input,
+textarea{
+	border:1px solid #ccc;
+	padding:5px;
+}
+input:hover,textarea:hover,
+input:focus,textarea:focus{border-color:#f60;}
 
 /*****************************************
 BLOCK
 *****************************************/
 #wrap{
-    width:850px;
-    margin:0 auto;
+    width:100%;
+    margin:0;
     overflow: hidden;
     position:relative;
+    background:#32ccfe;
 }
 #header{
-    background:#efefef;
-    padding:20px 0;
+    background:#000;
+    padding:15px 0;
     text-align: center;
+    color:#fff;
 }
 #content{
+	width:850px;
+    margin:0 auto;
     overflow: hidden;
     position:relative;
     margin-top:20px;
 }
 #main{
-    width:80%;
+    width:70%;
     float:left;
 }
 #side{
-    width:18%;
+    width:28%;
     float:right;
 }
 #footer{
@@ -105,15 +132,23 @@ MAIN
 #category_ttl{
     font-size: 1.3em;
     font-weight: bold;
-    background-color:#efefef;
+    background-color:#000;
     padding:10px;
-    margin-bottom:15px;
+    color:#fff;
+    -webkit-border-top-left-radius: 7px;
+	-webkit-border-top-right-radius: 7px;
+	-moz-border-radius-topleft: 7px;
+	-moz-border-radius-topright: 7px;
+	border-top-left-radius: 7px;
+	border-top-right-radius: 7px;
+}
+#tweet_list{
+	background-color:#fff;
 }
 
 .tweet_box{
-    border:1px solid #ccc;
-    background-color:#efefef;
-    margin-bottom:10px;
+    border-bottom:1px solid #ccc;
+    padding-bottom:5px;
 }
 .tweet_text{
     padding:10px;
@@ -121,16 +156,43 @@ MAIN
 }
 .tweet_footer{
     border-top:1px solid #fff;
-    padding-top:5px;
+    padding:5px;
+    font-size:0.8em;
+    color:#999;
 }
 .tweet_footer span{
     padding-right:1em;
-    padding: 5px;
+    padding: 2px 5px;
 }
+
+.tweet_screen_name a,
+.tweet_screen_name a:visited,
+.tweet_screen_name a:hover,
+.tweet_screen_name a:active{
+	color:#666;
+	text-decoration: underline;
+}
+.tweet_screen_name a:hover,
+.tweet_screen_name a:active{
+	color: #333;
+	text-decoration: none;
+	background-color: #efefef;
+}
+
 .tweet_category{
     display: block;
     border-top: 1px solid #fff;
     margin-top:5px;
+}
+.tweet_category a{
+	background-color: #ccc;
+	color: #000;
+	text-decoration: none;
+	padding:2px 5px;
+	display:inline-block;
+}
+.tweet_category a:hover{
+	background-color: #999;
 }
 
 /*****************************************
@@ -138,21 +200,30 @@ SIDE
 *****************************************/
 #category_list li{
     display: block;
-    margin-bottom:2px;
-}
-#category_list li a{
-    background:#efefef;
-    padding:5px;
+    background:#fff;
+    padding:7px 10px 7px 27px;
     text-align: left;
-    border-left:4px solid #ccc;
+    border-bottom:1px solid #ccc;
     display: block;
+    cursor: pointer;
 }
-
-.side_item{
-    background:#efefef;
-    padding:5px;
-    text-align: left;
-    border-left:4px solid #ccc;
-    display: block;
+#category_list li:first-child{
+    -webkit-border-top-left-radius: 7px;
+	-webkit-border-top-right-radius: 7px;
+	-moz-border-radius-topleft: 7px;
+	-moz-border-radius-topright: 7px;
+	border-top-left-radius: 7px;
+	border-top-right-radius: 7px;
+}
+#category_list li:last-child{
+    -webkit-border-bottom-left-radius: 7px;
+	-webkit-border-bottom-right-radius: 7px;
+	-moz-border-radius-bottomleft: 7px;
+	-moz-border-radius-bottomright: 7px;
+	border-bottom-left-radius: 7px;
+	border-bottom-right-radius: 7px;
+}
+#category_list li:hover{
+	background-color: #efefef;
 }
 
