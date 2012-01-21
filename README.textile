@@ -12,22 +12,49 @@ h2. ローカル開発環境の整備
 必要なのは以下のものです。
 
 * GooglePlugin for Eclipse (GPE)
-** http://code.google.com/intl/ja/eclipse/docs/getting_started.html
 * GoogleAppEngine SDK (GPEと一緒に落とせる)
 * maven2
 
-h3. Macの場合
 
-sudo port sync; sudo port install maven2
-でmaven2 がインストールされます。(MacPortsが利用可能な場合)
+h4. GooglePluginのインストール
+ 
+* 詳細は "http://code.google.com/intl/ja/eclipse/docs/getting_started.html":http://code.google.com/intl/ja/eclipse/docs/getting_started.html を参照してください。
 
-後は
 
-mvn clean eclipse:clean eclipse:eclipse
-でEclipseにimportするためのメタファイルや依存ライブラリが自動的に生成/Downloadされます。
+h4. maven2のインストール
+* PCがMacでMacPortsが利用可能な場合maven2は以下のコマンドでインストールできます。
+<pre>sudo port sync; sudo port install maven2
+</pre>それ以外の場合は. . . ※誰か書いて. . . 
 
-後はEclipseからプロジェクトをimportして Run as > WebApplication してください。
-もしかしたら http://www.techscore.com/tech/Java/ApacheJakarta/Maven/4/ の設定が必要かもしれません。
+* Eclipseにmaven2用の変数を指定します。以下のコマンドを打ちます。下記[PATH]の部分はeclipseのworkspaceへのパスに置き換えて入力してください。（/Users/myname/Documents/workspaceとか）
+<pre>mvn -Declipse.workspace="PATH" eclipse:add-maven-repo</pre>
+  
 
-http://localhost:8888/
-で動作確認出来ます。
+h4. Eclipseにプロジェクトをインポート
+
+* インポート用のファイル生成
+プロジェクトのディレクトリ直下で、（例えば ***/vvakame10js/）次のコマンドを打つとでEclipseにimportするためのメタファイルや依存ライブラリが自動的に生成/Downloadされます。
+<pre>mvn clean eclipse:clean eclipse:eclipse</pre>
+
+
+* インポート
+Eclipseからプロジェクトをimportします。
+メニューから [File] > [Import] とクリックし、
+ダイアログ画面で [General] > [Existing Projects into Workspace] > [Next> とし、
+次の画面のSelect root directoryで、プロジェクトファイルのパスを入れて [Finish] します。
+
+* エラーの修正（近日修正されるはず）
+インポートしたプロジェクトの[src/main/java/] > [net.vvakame.vvakame10js.controller] >[LoginController.java] ファイルにエラーがあるやもしれません。その場合のみ、以下の対応をします。
+** L14のimport文消します。
+** L44の文を次のように変更します。<pre>Set<String> rm = new HashSet<String>() ;</pre>
+** 冒頭に次のimport文を追記します。<pre>import java.util.HashSet;</pre>
+
+
+
+h4. プロジェクトの実行
+
+* Eclipseからプロジェクトを右クリックして[Run as] > [WebApplication] とします。
+** 初回はwarディレクトリの場所を尋ねられるので、[***/vvakame10js/war]のディレクトリを指定します。
+* 別途ブラウザを起動してURL欄に [http://localhost:8888/] と入力すれば動作確認ができます。
+* また、URL欄に [http://localhost:8888/_ah/admin] と入力するとデータ閲覧ができます。
+
