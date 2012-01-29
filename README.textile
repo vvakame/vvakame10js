@@ -54,7 +54,22 @@ Eclipseからプロジェクトをimportします。
 h4. プロジェクトの実行
 
 * Eclipseからプロジェクトを右クリックして[Run as] > [WebApplication] とします。
-** 初回はwarディレクトリの場所を尋ねられるので、[***/vvakame10js/war]のディレクトリを指定します。
+** 初回起動時はwarディレクトリの場所を尋ねられるので、[***/vvakame10js/war]のディレクトリを指定します。
+
 * 別途ブラウザを起動してURL欄に [http://localhost:8888/] と入力すれば動作確認ができます。
-* また、URL欄に [http://localhost:8888/_ah/admin] と入力するとデータ閲覧ができます。
+** 初回はtwitter認証処理が入ります。
+
+h5. 初期設定 
+* ブラウザでURL欄にhttp://localhost:8888/tweetlist と入力します。
+** 少し間をおいて大量のtweetらしい表示がでれば成功。
+** HTTP ERROR 500が出る場合は以下の手順でやり直し。
+*** プロジェクトのwar/appengine-generatedを削除。
+*** プロジェクトをRefreshして再起動（一旦サーバー止めてから）
+*** ブラウザURL欄にhttp://localhost:8888と入力→Twitter認証が入るはず
+* URL欄に http://localhost:8888/_ah/admin と入力します。
+* [Select different namespace]をクリック→[Namespace]欄に自身のtwitterのuser_idを入力してList entitiesボタンをクリックします。
+** user_idの調べ方は... （じきにスマートなやり方に上書きされるはず）
+*** https://api.twitter.com/1/users/show.json?screen_name=＊＊＊ ←ここにtwitterのscreen_name（@が付く方の名前、＠以降の文字列）
+*** ページ表示されたら、[id_str] で検索して最初にヒットするところの直後の桁数多めの数字がuser_idです...
+** 表が表示されたら成功。（予め幾つかふぁぼっとかんと分からない？）
 
