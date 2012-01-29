@@ -1,6 +1,7 @@
 package net.vvakame.vvakame10js.controller;
 
 import java.util.Enumeration;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -11,7 +12,7 @@ import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
 import twitter4j.auth.RequestToken;
 
-import com.google.appengine.repackaged.com.google.common.collect.Sets;
+//import com.google.appengine.repackaged.com.google.common.collect.Sets;
 
 public class LoginController extends BaseController {
 
@@ -41,7 +42,8 @@ public class LoginController extends BaseController {
 		{ // セッションをクリアしといてあげてみる
 			@SuppressWarnings("rawtypes")
 			Enumeration names = request.getSession().getAttributeNames();
-			Set<String> rm = Sets.newHashSet();
+			//Set<String> rm = Sets.newHashSet();
+			Set<String> rm = new HashSet<String>() ;
 			while (names.hasMoreElements()) {
 				String name = (String) names.nextElement();
 				rm.add(name);
