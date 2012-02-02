@@ -27,40 +27,47 @@ public class TweetlistController extends BaseController {
 
 	@Override
 	void process() throws Exception {
+		refreshList(userHash);
+
 		if (isGet()) {
-			get(userHash);
+			String category = asString("category");
+
+			get(userHash, category);
 		}
 	}
 
-	void get(String userHash) throws IOException, TwitterException {
-		{
-			List<Category> all = CategoryService.getAll();
+	void get(String userHash, String category) throws IOException,
+			TwitterException {
 
-			Long latestId = FavoriteService.getLatestFavId();
-
-			int page = 1;
-			Paging paging;
-			ResponseList<Status> statusList;
-			do {
-				if (latestId == null) {
-					paging = new Paging(page).count(50);
-				} else {
-					paging = new Paging(page).count(50).sinceId(latestId);
-				}
-				statusList = twitter.getFavorites(paging);
-
-				logger.info("get " + statusList.size() + " favs.");
-
-				for (Status status : statusList) {
-					processFavorite(all, status);
-				}
-				page++;
-			} while (statusList.size() != 0 && page < 10);
-		}
-
-		List<Favorite> favList = FavoriteService.getRecently();
+		List<Favorite> favList = FavoriteService
+				.getRecentlyByCategory(category);
 		String json = FavoriteMeta.get().modelsToJson(favList);
 		response.getWriter().write(json);
+	}
+
+	void refreshList(String userHash) throws IOException, TwitterException {
+		List<Category> all = CategoryService.getAll();
+
+		Long latestId = FavoriteService.getLatestFavId();
+
+		int page = 1;
+		Paging paging;
+		ResponseList<Status> statusList;
+		do {
+			if (latestId == null) {
+				paging = new Paging(page).count(50);
+			} else {
+				paging = new Paging(page).count(50).sinceId(latestId);
+			}
+			statusList = twitter.getFavorites(paging);
+
+			logger.info("get " + statusList.size() + " favs.");
+
+			for (Status status : statusList) {
+				processFavorite(all, status);
+			}
+			page++;
+		} while (statusList.size() != 0 && page < 10);
 	}
 
 	Favorite processFavorite(List<Category> categories, Status status) {

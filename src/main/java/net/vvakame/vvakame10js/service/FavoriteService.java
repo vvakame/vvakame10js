@@ -47,8 +47,8 @@ public class FavoriteService {
 	}
 
 	public static Long getLatestFavId() {
-		Favorite latest = Datastore.query(META).sort(META.key.desc)
-				.limit(1).asSingle();
+		Favorite latest = Datastore.query(META).sort(META.key.desc).limit(1)
+				.asSingle();
 		if (latest == null) {
 			return null;
 		}
@@ -57,7 +57,11 @@ public class FavoriteService {
 	}
 
 	public static List<Favorite> getRecently() {
-		return Datastore.query(META).sort(META.key.desc).limit(100)
-				.asList();
+		return Datastore.query(META).sort(META.key.desc).limit(100).asList();
+	}
+
+	public static List<Favorite> getRecentlyByCategory(String category) {
+		return Datastore.query(META).filter(META.categories.equal(category))
+				.sort(META.key.desc).limit(100).asList();
 	}
 }
