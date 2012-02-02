@@ -1,0 +1,154 @@
+/***********************************************************/
+第1回　vvakame10js（'12/01/03開催）のメモ
+/***********************************************************/
+
+
+スコープ＝適用範囲、みたいな？function関数の｛｝内とか。
+クロージャー？
+
+json使うときとか必要そう↓
+var hoge = {
+    "もちもち": "お土産あり",
+    "やきそば" : "お土産なし",
+    "kassy" : "あったっけ？",
+    "tomo_watanabe" : "お世話になってる",
+    "bols-blue":"ばか！！"
+};
+
+for(var t in hoge){
+    print(t + "=" + hoge[t]);
+}
+
+
+
+【　ソースメモ　】
+----------------------------------------------------------------
+function print(str) {
+    document.write(str);
+}
+
+var print2 = function(str){
+    document.write(str);
+};
+
+var hoge = 1;
+
+var func = function(){
+    var temp;
+
+    temp = "hoge";
+
+    var tmpFunc = function(){
+	temp = "fuga";
+    };
+    tmpFunc();
+    return temp;
+}
+
+var counter = (function(){
+    var count = 0;
+    var func = function(reset){
+	if(reset){
+	    count = 0;
+	}
+	count++;
+	return count;
+    };
+    return func;
+})();
+
+function callback(){
+    var count = counter();
+    if(count == 10){
+	count = counter(true);
+    }
+    print(count);
+    setTimeout(callback, 1000);
+}
+
+// callback();
+
+var hoge = {
+    "もちもち": "お土産あり",
+    "やきそば" : "お土産なし",
+    "kassy" : "あったっけ？",
+    "tomo_watanabe" : "お世話になってる",
+    "bols-blue":"ばか！！"
+};
+
+/*
+for(var t in hoge){
+    print(t + "=" + hoge[t]);
+}
+*/
+
+// pattern 1
+var oreSpace = {};
+
+oreSpace.print = function(str){
+    document.write(str);
+};
+
+// oreSpace.print("hoge");
+
+// pattern 2
+(function(){
+    var print = function(str){
+	document.write(str);
+    };
+
+    print("hoge");
+})();
+----------------------------------------------------------------
+
+jsでデバッグ
+
+----------------------------------------------------------------
+DOM＝HTMLのツリー構造のことっぽい
+
+----------------------------------------------------------------
+プロトタイプベースのオブジェクト指向
+コーヒースクリプト
+
+
+ユーザー名とツイート内容を取得してコンソールログで表示
+
+
+Mockjax　＝　テスト環境と本番環境の切り替えが簡単にできて便利。
+
+-----------------------------------------------------------------
+！やってみる！
+★ツイッターのFavを取得して分類★
+
+【１．APIリストを作る】
+　　　[ツイッターサーバ]
+　　　　　　　　　　＼
+[クライアント]　―　[ウチのサーバ]
+
+１）ログインチェックAPI→GET
+リクエスト：GET/login
+レスポンス：redirectUrl:url
+
+２）カテゴリ一覧取得→GET
+リクエスト：GET/category
+レスポンス：Array.name:
+
+３）カテゴリにマッチするツイート一覧取得→GET	onClickCategory(name)
+リクエスト：GET/tweetlist category:
+レスポンス：Array.ツイッター公式APIと同じJSON
+
+４）カテゴリ追加（管理者用）ラベル、マッチする単語→POST
+リクエスト：POST/add name: array.text:
+レスポンス：200→OK				↓
+								text0
+								text1
+								text2
+
+
+【２．分担を決める】
+デザイン側作成→わたこ
+１、３→もちもち
+２、４→かっしー
+
+
+【３．がんばる】
