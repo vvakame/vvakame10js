@@ -1,5 +1,6 @@
 package net.vvakame.vvakame10js.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class Favorite {
 	@Json(alias = "id", coder = KeyIdEncoder.class)
 	Key key;
 
-	List<String> categories;
+	List<String> categories = new ArrayList<String>();
 
 	@Attribute(unindexed = true)
 	boolean favorited;
