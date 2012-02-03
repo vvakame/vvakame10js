@@ -58,4 +58,49 @@ public abstract class BaseController extends Controller {
 		String userHash = getUserHash();
 		return !StringUtil.isEmpty(userHash);
 	}
+
+	@Override
+	protected boolean isGet() {
+		String thisMethod = "get";
+		String method = asString("m");
+
+		if (method != null) {
+			if (thisMethod.equals(method)) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+		return super.isGet();
+	}
+
+	@Override
+	protected boolean isPost() {
+		String thisMethod = "post";
+		String method = asString("m");
+
+		if (method != null) {
+			if (thisMethod.equals(method)) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+		return super.isPost();
+	}
+
+	@Override
+	protected boolean isPut() {
+		String thisMethod = "put";
+		String method = asString("m");
+
+		if (method != null) {
+			if (thisMethod.equals(method)) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+		return super.isPut();
+	}
 }
