@@ -227,3 +227,6 @@ SIDE
 	background-color: #efefef;
 }
 
+#admin_link li a{
+    color:#000000;
+}

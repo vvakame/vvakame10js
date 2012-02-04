@@ -16,9 +16,11 @@
     <script type="text/javascript" charset="UTF-8" src="js/mockjax-checkLogin.js"></script>
 
     <script type="text/javascript" charset="UTF-8" src="js/main.js"></script>
-
-    <script type="text/javascript" charset="UTF-8" src="js/categories.js"></script>
+    <!--
+        <script type="text/javascript" charset="UTF-8" src="js/categories.js"></script>
+    -->
     <script type="text/javascript" charset="UTF-8" src="js/add.js"></script>
+
     <script type="text/javascript" charset="UTF-8" src="js/checkLogin.js"></script>
 
 </head>
@@ -29,13 +31,40 @@
     </div>
     <div id="content">
         <h2 id="category_ttl">管理画面</h2>
+<!--
         <form id="form" action="" method="">
-            <fieldset>
-                <legend>追加したいカテゴリ名を入力</legend>
-                <input type="text" class="category_add_input" value="">
-                <button class="category_add_btn">追加</button>
-            </fieldset>
+-->
+        <fieldset>
+            <legend>追加したいカテゴリ名を入力</legend>
+            <table>
+                <tr valign="top">
+                    <td>
+                        カテゴリー名
+                    </td>
+                    <td>
+                        検索語
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <td>
+                        <input type="text" id="category_name_input" class="category_add_input" value="">
+                    </td>
+                    <td>
+                        <div id="category_text_input">
+                            <input type="text" id="category_text_input0" class="category_add_input" value=""></br>
+                            <input type="text" id="category_text_input1" class="category_add_input" value="">
+                        </div>
+                    </td>
+                    <td>
+                    <button id="category_text_add_btn">+</button>
+                    <button id="category_post_btn">カテゴリーを検索候補に追加</button>
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+<!--
         </form>
+-->
         <div id="category_add_list">
             <ul>
                 <li class="new_add"><a href="">jQuery Tips</a></li>

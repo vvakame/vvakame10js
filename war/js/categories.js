@@ -8,24 +8,16 @@
 
 $(document).ready(function(){
     var processCategories = function(categoryList){
-        for (var i=0; i<categoryList.length; i++){
-            var category = categoryList[i];
-            var categoryName = category.name;
-            console.log("categoryName:" + categoryName );
-            addCategoryToDom(category);
-        }
+        addCategoryToDom(categoryList);
     };
     getCategories(processCategories);
+//    getCategories(addCategoryToDom2);
     tmpAddButtonAdd();
 });
 
-// TODO JsDoc でぐぐれ！ Javadocっぽい書き方よりJsDocのほうがいいよ！
-// ↑ へい！(； ･`д･´)
-// paramのtypeは...?? {function}とか書くのかいな...
-
 /**
  * カテゴリー一覧を取得しにいく
- * @param callback CB関数
+ * @param callback コールバック関数
  */
 var getCategories = function(callback) {
     $.ajax(
@@ -42,25 +34,62 @@ var getCategories = function(callback) {
 
 /**
  * DOM要素にカテゴリー加える
- * @param category カテゴリー単体
+ * @param categoryList カテゴリーリスト
  */
-var addCategoryToDom = function(category) {
+var addCategoryToDom = function(categoryList) {
+    var parent = $("#category_list");   // 追加先の要素
+    var categoryNameEl;
 
-    var parent = $("#category_list");
+    // まず親要素を一旦空に
+    parent.empty();
 
-    // TODO main.cssの"#category_list li a{"の箇所、別のclass名振ってください...
-    // リンク貼りたくないので...
-    // ↑自分で勝手に変えなさい！( ･`ω･´)
-    // ↑あい(´・ω・｀)
-    var categoryNameEl = $("<li class=\"side_item\" id=\"" + category.name + "\"/>");
-    categoryNameEl.click(function(){
-        onClickCategory(category.name);
-    });
-    categoryNameEl.text(category.name);
+    // 子要素追加
+    for (var i=0; i<categoryList.length; i++){
+        var category = categoryList[i];
+        var categoryName = category.name;
+        console.log("categoryName:" + categoryName );
+        categoryNameEl = $("<li class=\"side_item\" id=\"" + categoryName + "\"/>");
+        categoryNameEl.text(categoryName);
 
-    parent.append(categoryNameEl);
+        // カテゴリ要素をクリックした時の挙動
+
+        // うわああああ　ここのcategoryNameの値が必ず最後尾の名前になる...
+        // まさにクロージャだなこれ... さぁどうしよう
+//        categoryNameEl.click(function(){
+//            console.log("category clicked");
+//            onClickCategory(categoryName);
+//            changeCategoryLabel(categoryName);
+//        });
+
+        // これでどうだ！？
+        categoryNameEl.click(onCategoryElementClick(categoryName));
+
+        // カテゴリ要素を親に追加
+        parent.append(categoryNameEl);
+    }
 };
 
+/**
+ * カテゴリー要素をクリックした時の挙動を定義する関
+ * @param categoryName カテゴリーのラベル名
+ */
+var onCategoryElementClick = function(categoryName) {
+    return function(){
+        console.log("category clicked");
+        onClickCategory(categoryName);
+        changeCategoryLabel(categoryName);
+    }
+};
+
+/**
+ * 左カラムのカテゴリ名表記を変える
+ * @param categoryName カテゴリの名前
+ */
+var changeCategoryLabel = function(categoryName) {
+
+    var categoryTtlEl = $("#category_ttl");
+    categoryTtlEl.text(categoryName);
+};
 
 /**
  * ただのスタブ... あとで消すよこれ
@@ -79,23 +108,3 @@ var tmpAddButtonAdd = function() {
     parent.append(categoryNameEl);
 
 };
-
-// ↓ 超thx
-// わかめならこう書く
-// JavaScriptの場合、かっしーが書いたみたいに引数に関数を渡す場合冗長になりがち。
-// そこで、一回名前を与えてからそっちを引数として渡したほうが分かりやすい場合のほうが多い気がするかなー。
-/*
-$(document).ready(function(){
-    var processCategories = function(categoryList){
-        for (var i=0; i<categoryList.length; i++){
-            var category = categoryList[i];
-            var categoryName = category.name;
-            console.log("categoryName:" + categoryName );
-            addCategoryToDom(category);
-        }
-    };
-
-    getCategories(processCategories);
-    tmpAddButtonAdd();
-});
-*/
