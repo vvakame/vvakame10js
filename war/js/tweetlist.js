@@ -55,7 +55,7 @@ function addTweetList(data){
         tweetText.text(data[i].text);
 
         // footers
-        tweetScreenName.text("@" + data[i].user.screen_name + " (" + data[i].user.name + ")");
+        tweetScreenName.text("@" + data[i].screen_name + " (" + data[i].name + ")");
         tweetPost.text(data[i].created_at);
         tweetCategory.text(data[i].category);
         // add to footerDiv
