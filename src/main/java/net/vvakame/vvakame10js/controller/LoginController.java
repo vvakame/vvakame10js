@@ -34,7 +34,7 @@ public class LoginController extends BaseController {
 
 		String consumerKey = TwitterOAuthUtil.getConsumerKey();
 		String consumerSecret = TwitterOAuthUtil.getConsumerSecret();
-		String baseUrl = TwitterOAuthUtil.getBaseUrl();
+		String baseUrl = TwitterOAuthUtil.getBaseUrl(request);
 
 		Twitter twitter = new TwitterFactory().getInstance();
 		twitter.setOAuthConsumer(consumerKey, consumerSecret);

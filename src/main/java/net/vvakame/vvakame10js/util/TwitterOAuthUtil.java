@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * utilities for oauth of google app engine.
  * 
@@ -43,7 +45,7 @@ public class TwitterOAuthUtil {
 	public static String getConsumerSecret() {
 		return PROPERTIES.getProperty("consumerSecret");
 	}
-	
+
 	/**
 	 * 指定されたappIdに対応したConsumerSecretを取得します.
 	 * 
@@ -51,7 +53,14 @@ public class TwitterOAuthUtil {
 	 * @return ConsumerSecret
 	 * @author vvakame
 	 */
-	public static String getBaseUrl() {
-		return PROPERTIES.getProperty("baseUrl");
+	public static String getBaseUrl(HttpServletRequest req) {
+		String scheme = req.getScheme();
+		String serverName = req.getServerName();
+		int serverPort = req.getServerPort();
+
+		StringBuilder builder = new StringBuilder();
+		builder.append(scheme).append("://").append(serverName).append(":")
+				.append(serverPort).append("/");
+		return builder.toString();
 	}
 }
