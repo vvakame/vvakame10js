@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.vvakame.vvakame10js.service.CategoryService;
+import net.vvakame.vvakame10js.service.FavoriteService;
 
 import org.slim3.util.StringUtil;
 
@@ -26,6 +27,7 @@ public class CategoryController extends BaseController {
 	void process() throws Exception {
 
 		if (isPost()) {
+			FavoriteService.processFavorites();
 			post();
 		} else if (isGet()) {
 			get();

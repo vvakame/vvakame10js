@@ -1,8 +1,8 @@
 package net.vvakame.vvakame10js.model;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 import net.vvakame.vvakame10js.util.KeyIdEncoder;
 
@@ -25,7 +25,7 @@ public class Favorite {
 	@Json(alias = "id", coder = KeyIdEncoder.class)
 	Key key;
 
-	List<String> categories = new ArrayList<String>();
+	Set<String> categories = new LinkedHashSet<String>();
 
 	@Attribute(unindexed = true)
 	boolean favorited;
@@ -69,7 +69,7 @@ public class Favorite {
 	/**
 	 * @return the categories
 	 */
-	public List<String> getCategories() {
+	public Set<String> getCategories() {
 		return categories;
 	}
 
@@ -77,7 +77,7 @@ public class Favorite {
 	 * @param categories
 	 *            the categories to set
 	 */
-	public void setCategories(List<String> categories) {
+	public void setCategories(Set<String> categories) {
 		this.categories = categories;
 	}
 
