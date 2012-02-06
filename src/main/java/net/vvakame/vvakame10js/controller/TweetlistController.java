@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.logging.Logger;
 
+import net.vvakame.vvakame10js.controller.tq.FetchFavoriteController;
 import net.vvakame.vvakame10js.meta.FavoriteMeta;
 import net.vvakame.vvakame10js.model.Favorite;
 import net.vvakame.vvakame10js.service.FavoriteService;
@@ -19,8 +20,8 @@ public class TweetlistController extends BaseController {
 
 	@Override
 	void process() throws Exception {
-		FavoriteService.fetchFavorite(twitter, userHash);
-		FavoriteService.processFavorites();
+		// TODO 30分に1回くらいに制限しないとあっちゅーまにAPI枯渇する
+		FetchFavoriteController.addTask(userHash);
 
 		if (isGet()) {
 			String category = asString("category");

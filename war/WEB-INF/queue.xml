@@ -1,11 +1,15 @@
 <queue-entries>
-  <queue>
-    <name>default</name>
-    <rate>10/s</rate>
-  </queue>
-  <queue>
-    <name>slim3-gtx-queue</name>
-    <rate>10/s</rate>
-    <bucket-size>10</bucket-size>
-  </queue>
+	<queue>
+		<name>default</name>
+		<rate>10/s</rate>
+	</queue>
+	<queue>
+		<name>slim3-gtx-queue</name>
+		<rate>10/s</rate>
+		<bucket-size>10</bucket-size>
+	</queue>
+	<queue>
+		<name>fetch-favorite</name>
+		<rate>6/m</rate>
+	</queue>
 </queue-entries>
