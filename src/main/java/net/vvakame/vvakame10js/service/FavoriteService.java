@@ -9,6 +9,7 @@ import net.vvakame.vvakame10js.model.Category;
 import net.vvakame.vvakame10js.model.Favorite;
 
 import org.slim3.datastore.Datastore;
+import org.slim3.util.StringUtil;
 
 import twitter4j.Paging;
 import twitter4j.ResponseList;
@@ -17,6 +18,7 @@ import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.User;
 
+import com.google.appengine.api.NamespaceManager;
 import com.google.appengine.api.datastore.Key;
 
 public class FavoriteService {
@@ -26,11 +28,18 @@ public class FavoriteService {
 
 	private static final FavoriteMeta META = FavoriteMeta.get();
 
+	static void checkNamespace() {
+		if (StringUtil.isEmpty(NamespaceManager.get())) {
+			throw new IllegalStateException("namespace was empty!");
+		}
+	}
+
 	public static Key createKey(long id) {
 		return Datastore.createKey(Favorite.class, id);
 	}
 
 	public static Favorite putIfNotExists(Status status) {
+		checkNamespace();
 
 		Key key = createKey(status.getId());
 		Favorite favorite = Datastore.getOrNull(Favorite.class, key);
@@ -57,6 +66,8 @@ public class FavoriteService {
 	}
 
 	public static Long getLatestFavId() {
+		checkNamespace();
+
 		Favorite latest = Datastore.query(META).sort(META.key.desc).limit(1)
 				.asSingle();
 		if (latest == null) {
@@ -67,16 +78,21 @@ public class FavoriteService {
 	}
 
 	public static List<Favorite> getRecently() {
+		checkNamespace();
+
 		return Datastore.query(META).sort(META.key.desc).limit(100).asList();
 	}
 
 	public static List<Favorite> getRecentlyByCategory(String category) {
+		checkNamespace();
+
 		return Datastore.query(META).filter(META.categories.equal(category))
 				.sort(META.key.desc).limit(100).asList();
 	}
 
 	public static void fetchFavorite(Twitter twitter, String userHash)
 			throws IOException, TwitterException {
+		checkNamespace();
 
 		Long latestId = FavoriteService.getLatestFavId();
 
@@ -101,6 +117,8 @@ public class FavoriteService {
 	}
 
 	public static void processFavorites() {
+		checkNamespace();
+
 		final int LIMIT = 100;
 		int offset = 0;
 
@@ -119,8 +137,7 @@ public class FavoriteService {
 		} while (list.size() == LIMIT);
 	}
 
-	public static Favorite processFavorite(List<Category> categories,
-			Favorite favorite) {
+	static void processFavorite(List<Category> categories, Favorite favorite) {
 
 		// カテゴリが削除されることを一応考慮してあげる…
 		favorite.getCategories().clear();
@@ -133,9 +150,6 @@ public class FavoriteService {
 				favorite.getCategories().add(categoryName);
 			}
 		}
-		Datastore.put(favorite);
-
-		return favorite;
 	}
 
 	static boolean categoryWordContains(Category category, String text) {
