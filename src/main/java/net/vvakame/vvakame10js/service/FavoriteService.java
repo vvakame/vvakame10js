@@ -126,8 +126,9 @@ public class FavoriteService {
 
 		List<Favorite> list;
 		do {
-			list = Datastore.query(META).limit(LIMIT).offset(offset).asList();
-			offset += LIMIT;
+			list = Datastore.query(META).limit(LIMIT).offset(LIMIT * offset)
+					.asList();
+			offset++;
 
 			for (Favorite favorite : list) {
 				processFavorite(categories, favorite);
